@@ -1,0 +1,25 @@
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  border-bottom: 1px solid #d3d6da;
+}
+
+.left-menu {
+  padding: 10px;
+}
+
+.right-menu {
+  padding: 10px;
+}
+
+.logo {
+  font-family: 'nyt-karnakcondensed';
+  font-size: 37px;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px;
+}

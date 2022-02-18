@@ -1,0 +1,9 @@
+.board-container {
+  width: 330px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.board-container div {
+  display: flex;
+}
