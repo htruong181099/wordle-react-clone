@@ -1,6 +1,6 @@
 import KeyElement from './KeyElement';
 import classes from './Keyboard.module.css';
-import { useContext } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import GameContext from '../../store/game-context';
 
 const Keyboard = (props) => {
@@ -36,32 +36,41 @@ const Keyboard = (props) => {
   ];
 
   const gameContext = useContext(GameContext);
-  const keyAddHandler = (letter) => {
-    gameContext.addLetter(letter);
-  };
+  const { addLetter, deleteLetter, checkRow, keyGuessed } = gameContext;
+  const keyAddHandler = useCallback(
+    (letter) => {
+      addLetter(letter);
+    },
+    [addLetter]
+  );
 
-  const keyDeleteHandler = () => {
-    gameContext.deleteLetter();
-  };
+  const keyDeleteHandler = useCallback(() => {
+    deleteLetter();
+  }, [deleteLetter]);
 
-  const rowCheckHandler = () => {
-    gameContext.checkRow();
-  };
+  const rowCheckHandler = useCallback(() => {
+    checkRow();
+  }, [checkRow]);
 
-  const keyDownHandler = (event) => {
-    event.target.focus();
-    const key = event.key;
-    if (!KEYS.includes(key.toUpperCase())) {
-      return;
-    }
-    if (key === 'Enter') {
-      console.log(key);
-    } else if (key === 'Backspace') {
-      console.log(key);
-    } else {
-      console.log(key);
-    }
-  };
+  //Keyup event handler
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.key === 'Enter') {
+        rowCheckHandler();
+      } else if (event.key === 'Backspace') {
+        keyDeleteHandler();
+      } else {
+        const key = event.key.toUpperCase();
+        if (key.length === 1 && key >= 'A' && key <= 'Z') {
+          keyAddHandler(key);
+        }
+      }
+    };
+    window.addEventListener('keyup', listener);
+    return () => {
+      window.removeEventListener('keyup', listener);
+    };
+  }, [keyAddHandler, keyDeleteHandler, rowCheckHandler]);
 
   const keys = KEYS.map((key) => {
     return (
@@ -71,6 +80,7 @@ const Keyboard = (props) => {
         onClick={keyAddHandler}
         onDelete={keyDeleteHandler}
         onEnter={rowCheckHandler}
+        status={keyGuessed[key] ? keyGuessed[key] : ''}
       >
         {key}
       </KeyElement>
@@ -78,11 +88,7 @@ const Keyboard = (props) => {
   });
 
   return (
-    <div
-      className={classes['keyboard-container']}
-      onKeyDown={keyDownHandler}
-      tabIndex={0}
-    >
+    <div className={classes['keyboard-container']} tabIndex={0}>
       {keys}
     </div>
   );

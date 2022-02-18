@@ -21,6 +21,7 @@ const GameContext = React.createContext({
   checkRow: () => {},
   message: '',
   isGameOver: false,
+  keyGuessed: {},
 });
 
 export default GameContext;

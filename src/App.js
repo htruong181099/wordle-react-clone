@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Board from './components/Board/Board';
 import Header from './components/Header';
 import Keyboard from './components/Keyboard/Keyboard';
 import ResultModal from './components/ResultModal';
-import GameContext from './store/game-context';
 import GameContextProvider from './store/GameContextProvider';
 
 function App() {

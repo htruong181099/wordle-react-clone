@@ -1,3 +1,5 @@
+import classes from './KeyElement.module.css';
+
 const KeyElement = (props) => {
   const handleClick = (event) => {
     if (event.target.id === 'ENTER') {
@@ -10,7 +12,11 @@ const KeyElement = (props) => {
   };
 
   return (
-    <button id={props.id} onClick={handleClick}>
+    <button
+      id={props.id}
+      onClick={handleClick}
+      className={props.status && classes[props.status]}
+    >
       {props.children}
     </button>
   );
