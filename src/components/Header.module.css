@@ -23,3 +23,14 @@
   text-align: center;
   padding: 10px;
 }
+
+.icon {
+  background: none;
+  border: none;
+  padding: 5px;
+}
+
+.icon:hover {
+  background-color: #d3d6da;
+  cursor: pointer;
+}
