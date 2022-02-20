@@ -1,0 +1,49 @@
+p {
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container header {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+  position: relative;
+}
+
+.container header span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 8px;
+}
+
+.container header span:hover {
+  background-color: rgb(178, 186, 194);
+}
+
+.instructions {
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+
+.example {
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.example div {
+  display: flex;
+}

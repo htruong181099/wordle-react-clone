@@ -3,7 +3,10 @@ import './App.css';
 import Board from './components/Board/Board';
 import Header from './components/Header';
 import Keyboard from './components/Keyboard/Keyboard';
-import ResultModal from './components/ResultModal';
+
+import ResultModal from './components/Layout/ResultModal';
+import HowToPlay from './components/Layout/HowToPlay';
+
 import GameContextProvider from './store/GameContextProvider';
 
 function App() {
@@ -30,7 +33,7 @@ function App() {
           onDisplayHelp={displayHelpHandler}
           onDisplayStat={displayStatHandler}
         />
-        {helpDisplay && <p>Help</p>}
+        {helpDisplay && <HowToPlay onClose={displayHelpHandler} />}
         {statDisplay && <p>Stat</p>}
 
         {resultDisplay && <ResultModal onClose={displayResultHandler} />}
