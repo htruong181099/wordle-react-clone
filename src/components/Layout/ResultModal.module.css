@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.container header {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+  position: relative;
+  width: 100%;
+}
+
+.container header span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 8px;
+}
+
+.container header span:hover {
+  background-color: rgb(178, 186, 194);
+}
+
+.row {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.row div {
+  display: flex;
+}

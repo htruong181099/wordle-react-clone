@@ -1,48 +1,47 @@
-import { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import './App.css';
 import Board from './components/Board/Board';
 import Header from './components/Header';
 import Keyboard from './components/Keyboard/Keyboard';
-
-import ResultModal from './components/Layout/ResultModal';
-import HowToPlay from './components/Layout/HowToPlay';
-
 import GameContextProvider from './store/GameContextProvider';
 
+import LoadingModal from './components/Layout/LoadingModal';
+const ResultModal = React.lazy(() => import('./components/Layout/ResultModal'));
+const HowToPlay = React.lazy(() => import('./components/Layout/HowToPlay'));
+
 function App() {
-  const [helpDisplay, setHelpDisplay] = useState(false);
-  const [statDisplay, setStatDisplay] = useState(false);
-  const [resultDisplay, setResultDisplay] = useState(true);
+	const [helpDisplay, setHelpDisplay] = useState(false);
+	const [resultDisplay, setResultDisplay] = useState(true);
 
-  const displayHelpHandler = () => {
-    setHelpDisplay((prevHelpDisplay) => !prevHelpDisplay);
-  };
+	const displayHelpHandler = () => {
+		setHelpDisplay((prevHelpDisplay) => !prevHelpDisplay);
+	};
 
-  const displayStatHandler = () => {
-    setStatDisplay((prevStatDisplay) => !prevStatDisplay);
-  };
+	const displayResultHandler = (e, reset = false) => {
+		if (reset && resultDisplay) {
+			console.log(reset, resultDisplay);
+			return;
+		}
+		setResultDisplay((prevResultDisplay) => !prevResultDisplay);
+	};
 
-  const displayResultHandler = () => {
-    setResultDisplay((prevResultDisplay) => !prevResultDisplay);
-  };
-
-  return (
-    <GameContextProvider>
-      <div className="game-container">
-        <Header
-          onDisplayHelp={displayHelpHandler}
-          onDisplayStat={displayStatHandler}
-        />
-        {helpDisplay && <HowToPlay onClose={displayHelpHandler} />}
-        {statDisplay && <p>Stat</p>}
-
-        {resultDisplay && <ResultModal onClose={displayResultHandler} />}
-
-        <Board />
-        <Keyboard />
-      </div>
-    </GameContextProvider>
-  );
+	return (
+		<GameContextProvider>
+			<Suspense fallback={<LoadingModal />}>
+				<div className="game-container">
+					<Header
+						onDisplayHelp={displayHelpHandler}
+						onDisplayResult={displayResultHandler}
+					/>
+					{helpDisplay && <HowToPlay onClose={displayHelpHandler} />}
+					{resultDisplay && <ResultModal onClose={displayResultHandler} />}
+					<LoadingModal />
+					<Board />
+					<Keyboard />
+				</div>
+			</Suspense>
+		</GameContextProvider>
+	);
 }
 
 export default App;

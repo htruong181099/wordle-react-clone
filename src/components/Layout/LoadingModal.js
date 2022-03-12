@@ -4,22 +4,17 @@ import Modal from '../UI/Modal';
 
 import classes from './ResultModal.module.css';
 
-const ResultModal = (props) => {
+const LoadingModal = (props) => {
 	const gameContext = useContext(GameContext);
-	const { isGameOver, message, isLoading } = gameContext;
+	const { isLoading } = gameContext;
 
-	return isGameOver && !isLoading ? (
+	return isLoading ? (
 		<Modal onClose={props.onClose}>
 			<div className={classes.container}>
-				<header>
-					<h2>{message}</h2>
-					<span onClick={props.onClose} className={classes.exit}>
-						X
-					</span>
-				</header>
+				<h1>Loading...</h1>
 			</div>
 		</Modal>
 	) : null;
 };
 
-export default ResultModal;
+export default LoadingModal;

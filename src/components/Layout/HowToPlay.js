@@ -75,10 +75,10 @@ const HowToPlay = (props) => {
     <Modal onClose={props.onClose}>
       <div className={classes.container}>
         <header>
+          <h3>HOW TO PLAY</h3>
           <span onClick={props.onClose} className={classes.exit}>
             X
           </span>
-          <h3>HOW TO PLAY</h3>
         </header>
         <div className={classes.instructions}>
           <p>
