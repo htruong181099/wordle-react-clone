@@ -52,9 +52,9 @@ const defaultGameState = {
 		[TILE, TILE, TILE, TILE, TILE],
 		[TILE, TILE, TILE, TILE, TILE],
 	],
+	keyGuessed: keysObj,
 	isGameOver: false,
 	message: '',
-	keyGuessed: keysObj,
 };
 
 export const fetchWORDLE = (action, setIsLoading) => {
@@ -64,7 +64,7 @@ export const fetchWORDLE = (action, setIsLoading) => {
 			method: 'GET',
 			headers: {
 				'x-rapidapi-host': 'random-words5.p.rapidapi.com',
-				'x-rapidapi-key': '89f57491e9mshb187a374318bf90p13e976jsna7fc0dc001a2',
+				'x-rapidapi-key': process.env.API_KEY,
 			},
 		}
 	)
