@@ -1,6 +1,8 @@
 import { useEffect, useReducer, useState } from 'react';
 import GameContext from './game-context';
 
+const API_BASE_URL = 'https://wordle-proxy-server.herokuapp.com/api';
+
 const TILE = {
 	data: '',
 	status: null,
@@ -58,16 +60,10 @@ const defaultGameState = {
 };
 
 export const fetchWORDLE = (action, setIsLoading) => {
-	fetch(
-		'https://random-words5.p.rapidapi.com/getMultipleRandom?count=1&wordLength=5',
-		{
-			method: 'GET',
-			headers: {
-				'x-rapidapi-host': 'random-words5.p.rapidapi.com',
-				'x-rapidapi-key': process.env.API_KEY,
-			},
-		}
-	)
+	fetch(API_BASE_URL, {
+		method: 'GET',
+		headers: {},
+	})
 		.then((response) => {
 			return response.json();
 		})
@@ -79,7 +75,6 @@ export const fetchWORDLE = (action, setIsLoading) => {
 		.catch((err) => {
 			console.error(err);
 		});
-	setTimeout(() => {}, 1000);
 };
 
 const gameReducer = (state, action) => {
